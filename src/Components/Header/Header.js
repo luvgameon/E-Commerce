@@ -19,7 +19,7 @@ export default function Header() {
            
           </Nav>
         </Navbar.Collapse>
-        <Cart/>
+        <Cart  />
       </Container>
     </Navbar>
   )
