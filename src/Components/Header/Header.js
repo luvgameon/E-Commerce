@@ -7,7 +7,7 @@ import Cart from './Cart';
 
 export default function Header() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="dark" expand="lg" variant='dark'>
       <Container>
         <Navbar.Brand href="#home">E-Comm Store</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -19,7 +19,7 @@ export default function Header() {
            
           </Nav>
         </Navbar.Collapse>
-        <Cart  />
+        <Cart/>
       </Container>
     </Navbar>
   )
