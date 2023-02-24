@@ -1,19 +1,28 @@
 import React from 'react';
+import {
+  createBrowserRouter,RouterProvider
+} from 'react-router-dom';
 
 import './App.css';
-import Header from './Components/Header/Header';
-import Productslist from './Components/Products/Productslist';
-import CartState from './store/CartState';
+
+import About from './Pages/About';
+import ContactUs from './Pages/ContactUs';
+import Home from './Pages/Home';
+
+const router = createBrowserRouter([
+  { path: '/about', element: <About/> },
+  { path: '/', element: <Home/> },
+  { path: '/contact', element: <ContactUs/> },
+  
+  
+]);
 
 
 function App() {
   return (
     <>
-    <CartState>
-
-    <Header/>
-    <Productslist/>
-    </CartState>
+    <RouterProvider router={router} />;
+   
       </>
   );
 }
