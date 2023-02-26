@@ -1,6 +1,7 @@
 import React from 'react'
 import Product from './Product'
 
+
 export default function Productslist() {
     const productsArr = [
 
@@ -59,12 +60,14 @@ let quantity=1;
               <div className="row"> 
             
               {productsArr.map((item)=>{
-                  return <div className="col-md-4 my-3" key={item.img}>
+                  return<div className="col-md-4 my-3" key={item.img}>
                      <Product key={item.title} title={item.title} img={item.imageUrl} price={item.price} quantity={quantity} />
                   </div> 
+                  
               })} 
               </div> 
               </div> 
+             
               
     </>
   )
