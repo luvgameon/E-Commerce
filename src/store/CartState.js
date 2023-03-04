@@ -6,43 +6,32 @@ export default function CartState(props) {
     
   const [items, setitems] = useState([]);
   
-  const addItemToCartHandler = (props) => {
-    let quantity=0
-  cartState.items.forEach(item=>{
-    quantity=quantity+ Number(item.quantity);
-
-  })
-    
-    //   
-    // }
-
-    // setitems([...items,props]);
-    let temp = [...items];
-    let itemidx = temp.findIndex((i) => i.title === props.title);
-    if (itemidx === -1) {
-      temp = [...temp, props];
-    } else {
-      temp[itemidx].quantity = (temp[itemidx].quantity) + 1;
+  const addItemToCartHandler = (item) => {
+    let temp=[...items]
+    let indxOfItem=temp.findIndex((i)=>i.id===item.id)
+    if(indxOfItem===-1)
+    {
+        
+      temp=[...temp,item]
+    }else{
+        temp[indxOfItem].quantity=Number(temp[indxOfItem].quantity)+1
+        
     }
-
-    setitems([...temp]);
-    
-    
-    
+    setitems([...temp])
+  
   };
   const removeItemFromCartHandler = (id) => {
-    
-     let temp = [...items];
-    // let itemidx = temp.findIndex((i) => i.title === id.name);
-    // if(temp[itemidx].quantity>1){
+    let temp=[...items]
+        let indxOfItem=temp.findIndex((i)=>i.id===id)
+        if(temp[indxOfItem].quantity>1){
 
-    // temp[itemidx].quantity = Number(temp[itemidx].quantity) - 1;
-    // }
-    // else{
-      temp=temp.filter((i) => i.title !== id.title);
-    
-    
-    setitems([...temp]);
+            temp[indxOfItem].quantity = Number(temp[indxOfItem].quantity) - 1;
+            }
+            else{
+              temp=temp.filter((i) => i.id !== id);
+              
+            }
+            setitems([...temp]);
     
   };
 
