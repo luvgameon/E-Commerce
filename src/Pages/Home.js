@@ -1,15 +1,18 @@
 import React from 'react'
-import Header from '../Components/Header/Header'
-import Productslist from '../Components/Products/Productslist'
+
+import MainHeader from '../Components/Header/MainHeader'
+
 import CartState from '../store/CartState'
 
 
 export default function Home() {
-  return (
+  return (<>
     <CartState>
 
-    <Header/>
-    <Productslist/>
-    </CartState>
+<MainHeader/>
+
+</CartState>
+    <h1 className='text-center'>Welcome </h1>
+    </>
   )
 }
