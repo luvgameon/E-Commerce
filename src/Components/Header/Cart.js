@@ -49,20 +49,23 @@ export default function Cart() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => setShow(true) 
+    
+  
   let totalprice = 0;
   getData.forEach((item) => {
     totalprice += item.quantity * item.price;
   });
   useEffect(() => {
     fetch(
-      `https://crudcrud.com/api/b341ed28d7e34646bd091e1852fea3af/cart${userEmail}`,
+      `https://crudcrud.com/api/274e7250f11a4565b8ff3d080d7ed15a/cart${userEmail}`,
       { method: "GET" }
     ).then((res) => {
       if (res.ok) {
         res.json().then((data) => {
           
           setgetData(data);
+          console.log('getrun')
           
         });
       } else {
@@ -71,12 +74,13 @@ export default function Cart() {
         });
       }
     });
-  }, [cartState,userEmail]);
+  }, [cartState]);
+  
 
   return (
     <>
       <Button variant="warning" onClick={handleShow}>
-        Cart {totalitem} <i className="fa fa-shopping-cart"></i>
+        Cart {totalitem}  <i className="fa fa-shopping-cart"></i>
       </Button>
 
       <Offcanvas show={show} onHide={handleClose}>

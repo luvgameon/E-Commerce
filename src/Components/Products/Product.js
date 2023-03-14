@@ -13,35 +13,55 @@ export default function Product(props) {
 
   userEmail = userEmail.replace("@", "");
   userEmail = userEmail.replace(".", "");
-  useEffect(() => {
-    fetch(
-      `https://crudcrud.com/api/b341ed28d7e34646bd091e1852fea3af/cart${userEmail}`,
-      { method: "GET" }
-    ).then((res) => {
-      if (res.ok) {
-        res.json().then((data) => {
-          setapigetData(data);
+  // useEffect(() => {
+  //   fetch(
+  //     `https://crudcrud.com/api/274e7250f11a4565b8ff3d080d7ed15a/cart${userEmail}`,
+  //     { method: "GET" }
+  //   ).then((res) => {
+  //     if (res.ok) {
+  //       res.json().then((data) => {
+  //         setapigetData(data);
+  //         console.log('get run');
           
          
           
-        });
-      } else {
-        return res.json().then((data) => {
-          console.log('something went wrong');
-        });
-      }
-    });
+  //       });
+  //     } else {
+  //       return res.json().then((data) => {
+  //         console.log('something went wrong');
+  //       });
+  //     }
+  //   });
     
-  }, []);
+  // }, []);
 
   const addproductcart = (event) => {
+    fetch(
+          `https://crudcrud.com/api/274e7250f11a4565b8ff3d080d7ed15a/cart${userEmail}`,
+          { method: "GET" }
+        ).then((res) => {
+          if (res.ok) {
+            res.json().then((data) => {
+              setapigetData(data);
+              console.log('get run');
+              
+             
+              
+            });
+          } else {
+            return res.json().then((data) => {
+              console.log('something went wrong');
+            });
+          }
+        });
+    console.log('product run');
    
 
     let indxOfItem = apigetData.findIndex((i) => i.id === props.id);
 
     if (indxOfItem === -1) {
       fetch(
-        `https://crudcrud.com/api/b341ed28d7e34646bd091e1852fea3af/cart${userEmail}`,
+        `https://crudcrud.com/api/274e7250f11a4565b8ff3d080d7ed15a/cart${userEmail}`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -66,7 +86,7 @@ export default function Product(props) {
     } else {
       console.log("put chal raha h");
       fetch(
-        `https://crudcrud.com/api/b341ed28d7e34646bd091e1852fea3af/cart${userEmail}/${apigetData[indxOfItem]._id}`,
+        `https://crudcrud.com/api/274e7250f11a4565b8ff3d080d7ed15a/cart${userEmail}/${apigetData[indxOfItem]._id}`,
         {
           method: "PUT",
           body: JSON.stringify({
