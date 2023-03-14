@@ -33,7 +33,7 @@ function App() {
         {login && 
         <Store/>}
         {!login && 
-        <Redirect to='/'/> }
+        <Redirect to='/auth'/> }
       </Route>
       <Route exact path='/contact'>
         <ContactUs />

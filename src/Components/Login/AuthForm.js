@@ -29,6 +29,7 @@ const AuthForm = () => {
     event.preventDefault();
     const email=emailref.current.value;
     const pass=pasref.current.value;
+  
     setIsloading(true);
     if(isLogin){
       const respose = await fetch(
@@ -46,8 +47,10 @@ const AuthForm = () => {
         }
         );
         const data = await respose.json();
-        
+        if(data.idToken!==undefined){
         localStorage.setItem('id', data.idToken);
+        localStorage.setItem('email', email);
+        }
         authctx.login(localStorage.getItem('id'));
         if(localStorage.getItem('id')){
         history.replace('/store');
@@ -57,6 +60,8 @@ const AuthForm = () => {
          
          
           alert(data.error.message);
+          history.replace('/auth');
+
             
 
         }

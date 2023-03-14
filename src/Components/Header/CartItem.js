@@ -6,9 +6,10 @@ import ProductContext from '../../store/product-context';
 
 export default function CartItem(props) {
   const cartState=useContext(ProductContext);
-  const removeItem=(id)=>{
+  const removeItem=(event)=>{
     
-    cartState.removeItem(props);
+    cartState.removeItem(props.id);
+    
     
 
 
