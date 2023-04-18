@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import CartItem from "./CartItem";
@@ -6,23 +6,24 @@ import Table from "react-bootstrap/Table";
 import ProductContext from "../../store/product-context";
 
 export default function Cart() {
-  const [getData, setgetData] = useState([]);
+ 
   const cartState = useContext(ProductContext);
-  let userEmail = localStorage.getItem("email");
+  const clear=()=>{
+    alert("Purchased Successfull!")
+    window.location.reload();
+  }
 
-  userEmail = userEmail.replace("@", "");
-  userEmail = userEmail.replace(".", "");
   
 
 
   let totalitem = 0;
-  getData.forEach((item) => {
+  cartState.items.forEach((item) => {
     totalitem = totalitem + Number(item.quantity);
   });
  
 
   const listItem = (
-    <Table striped bordered hover>
+    <Table striped>
       <thead>
         <tr>
           <th>#</th>
@@ -32,7 +33,7 @@ export default function Cart() {
         </tr>
       </thead>
       <tbody>
-        {getData.map((item) => (
+        {cartState.items.map((item) => (
           <CartItem
             key={item.title}
             id={item.id}
@@ -53,28 +54,28 @@ export default function Cart() {
     
   
   let totalprice = 0;
-  getData.forEach((item) => {
+  cartState.items.forEach((item) => {
     totalprice += item.quantity * item.price;
   });
-  useEffect(() => {
-    fetch(
-      `https://crudcrud.com/api/274e7250f11a4565b8ff3d080d7ed15a/cart${userEmail}`,
-      { method: "GET" }
-    ).then((res) => {
-      if (res.ok) {
-        res.json().then((data) => {
+  // useEffect(() => {
+  //   fetch(
+  //     `https://e-comm-c4767-default-rtdb.firebaseio.com//cart${userEmail}.json`,
+  //     { method: "GET" }
+  //   ).then((res) => {
+  //     if (res.ok) {
+  //       res.json().then((data) => {
           
-          setgetData(data);
-          console.log('getrun')
+  //         setgetData(data);
+  //         console.log('getrun')
           
-        });
-      } else {
-        return res.json().then((data) => {
-          console.log('Something Went wrong');
-        });
-      }
-    });
-  }, [cartState]);
+  //       });
+  //     } else {
+  //       return res.json().then((data) => {
+  //         console.log('Something Went wrong');
+  //       });
+  //     }
+  //   });
+  // }, [cartState]);
   
 
   return (
@@ -93,6 +94,10 @@ export default function Cart() {
           {listItem}
           <hr />
           <h5>Total Price {totalprice} Rs</h5>
+          <Button onClick={clear} className="mx-2" variant="primary">
+          Purchased Now!
+        </Button>
+        {""}
         </Offcanvas.Body>
       </Offcanvas>
     </>

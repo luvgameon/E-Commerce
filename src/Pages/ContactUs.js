@@ -1,8 +1,11 @@
 import React,{useRef} from 'react'
-import MainHeader from '../Components/Header/MainHeader'
+import axios from 'axios';
+
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Header from '../Components/Header/Header';
+import MainHeader from '../Components/Header/MainHeader';
 
 export default function ContactUs() {
   const NameRef = useRef('');
@@ -21,18 +24,25 @@ export default function ContactUs() {
     };
 
     
-    const respose = await fetch(
-      "https://react-http-6410a-default-rtdb.firebaseio.com/user.json",
-      {
-        method: "POST",
-        body: JSON.stringify(UserDetails),
-        headers: {
-          "Content-type": "application/json",
-        },
-      }
-      );
-      const data = await respose.json();
-      console.log(data);
+    // const respose = await fetch(
+    //   "https://react-http-6410a-default-rtdb.firebaseio.com/user.json",
+    //   {
+    //     method: "POST",
+    //     body: JSON.stringify(UserDetails),
+    //     headers: {
+    //       "Content-type": "application/json",
+    //     },
+    //   }
+    //   );
+    //   const data = await respose.json();
+    //   console.log(data);
+  // const response=await axios.post('https://react-http-6410a-default-rtdb.firebaseio.com/user.json',{name: NameRef.current.value,
+  // email: EmailRef.current.value,
+  // phone: PhoneRef.current.value,})
+  
+  // console.log(response.data);
+  const mydata=await axios.get('https://react-http-6410a-default-rtdb.firebaseio.com/user.json');
+  console.log('mydata',mydata.data);
   }
   return (<>
     <MainHeader/>

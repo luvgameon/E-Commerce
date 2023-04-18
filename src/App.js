@@ -1,10 +1,10 @@
-import React,{useContext} from "react";
+import React,{useContext,Suspense,lazy} from "react";
 import { Redirect, Route,Switch } from "react-router-dom";
 
 import "./App.css";
 
 import About from "./Pages/About";
-import Store from "./Pages/Store";
+// import Store from "./Pages/Store";
 import ContactUs from "./Pages/ContactUs";
 import ProductDetails from "./Components/Products/ProductDetails";
 import AuthContext from "./store/auth-context";
@@ -13,6 +13,7 @@ import AuthContext from "./store/auth-context";
 
 import Home from './Pages/Home';
 import AuthPage from "./Pages/AuthPage";
+const Store=lazy(()=>import('./Pages/Store'))
 
 
 function App() {
@@ -30,10 +31,14 @@ function App() {
         <About/>
       </Route>
       <Route exact path='/store'>
+        <Suspense fallback={<h1 >Loading...</h1>}>
         {login && 
         <Store/>}
         {!login && 
         <Redirect to='/auth'/> }
+
+        </Suspense>
+        
       </Route>
       <Route exact path='/contact'>
         <ContactUs />

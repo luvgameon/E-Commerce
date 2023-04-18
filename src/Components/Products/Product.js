@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
@@ -8,14 +8,10 @@ import { Link } from "react-router-dom";
 
 export default function Product(props) {
   const cartState = useContext(ProductContext);
-  const [apigetData, setapigetData] = useState([]);
-  let userEmail = localStorage.getItem("email");
 
-  userEmail = userEmail.replace("@", "");
-  userEmail = userEmail.replace(".", "");
   // useEffect(() => {
   //   fetch(
-  //     `https://crudcrud.com/api/274e7250f11a4565b8ff3d080d7ed15a/cart${userEmail}`,
+  //     `https://e-comm-c4767-default-rtdb.firebaseio.com//cart${userEmail}.json`,
   //     { method: "GET" }
   //   ).then((res) => {
   //     if (res.ok) {
@@ -36,72 +32,72 @@ export default function Product(props) {
   // }, []);
 
   const addproductcart = (event) => {
-    fetch(
-          `https://crudcrud.com/api/274e7250f11a4565b8ff3d080d7ed15a/cart${userEmail}`,
-          { method: "GET" }
-        ).then((res) => {
-          if (res.ok) {
-            res.json().then((data) => {
-              setapigetData(data);
-              console.log('get run');
+    // fetch(
+    //       `https://crudcrud.com/api/7acbcea4778a45e38b45b91f3d3b2927/cart${userEmail}`,
+    //       { method: "GET" }
+    //     ).then((res) => {
+    //       if (res.ok) {
+    //         res.json().then((data) => {
+    //           setapigetData(data);
+    //           console.log('get run');
               
              
               
-            });
-          } else {
-            return res.json().then((data) => {
-              console.log('something went wrong');
-            });
-          }
-        });
-    console.log('product run');
+    //         });
+    //       } else {
+    //         return res.json().then((data) => {
+    //           console.log('something went wrong');
+    //         });
+    //       }
+    //     });
+    // console.log('product run');
    
 
-    let indxOfItem = apigetData.findIndex((i) => i.id === props.id);
+    // let indxOfItem = apigetData.findIndex((i) => i.id === props.id);
 
-    if (indxOfItem === -1) {
-      fetch(
-        `https://crudcrud.com/api/274e7250f11a4565b8ff3d080d7ed15a/cart${userEmail}`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            id: props.id,
-            title: props.title,
-            price: props.price,
-            img: props.img,
-            quantity: 1,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      ).then((res)=>{
-        res.json().then((data) => {
-          let temp=[...apigetData,data]
-          setapigetData(temp)
+    // if (indxOfItem === -1) {
+    //   fetch(
+    //     `https://e-comm-c4767-default-rtdb.firebaseio.com//cart${userEmail}.json`,
+    //     {
+    //       method: "POST",
+    //       body: JSON.stringify({
+    //         id: props.id,
+    //         title: props.title,
+    //         price: props.price,
+    //         img: props.img,
+    //         quantity: 1,
+    //       }),
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   ).then((res)=>{
+    //     res.json().then((data) => {
+    //       let temp=[...apigetData,data]
+    //       setapigetData(temp)
           
-          console.log(data);
-        });
-      });
-    } else {
-      console.log("put chal raha h");
-      fetch(
-        `https://crudcrud.com/api/274e7250f11a4565b8ff3d080d7ed15a/cart${userEmail}/${apigetData[indxOfItem]._id}`,
-        {
-          method: "PUT",
-          body: JSON.stringify({
-            id: props.id,
-            title: props.title,
-            price: props.price,
-            img: props.img,
-            quantity: apigetData[indxOfItem].quantity + 1,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    }
+    //       console.log(data);
+    //     });
+    //   });
+    // } else {
+    //   console.log("put chal raha h");
+    //   fetch(
+    //     `https://e-comm-c4767-default-rtdb.firebaseio.com//cart${userEmail}/${apigetData[indxOfItem]._id}.json`,
+    //     {
+    //       method: "PUT",
+    //       body: JSON.stringify({
+    //         id: props.id,
+    //         title: props.title,
+    //         price: props.price,
+    //         img: props.img,
+    //         quantity: apigetData[indxOfItem].quantity + 1,
+    //       }),
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
+    // }
 
     cartState.addItem({ ...props, quantity: 1 });
   };
